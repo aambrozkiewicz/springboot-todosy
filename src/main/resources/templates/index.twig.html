@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Todosy</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style type="text/css">
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Todosy <small>spring-boot</small></h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <input class="form-control" id="input-todo" type="text" @keyup.enter="add" v-model="todo.title"
+                   placeholder="What needs to be done?" autofocus>
+            <hr />
+
+            <ul class="list-group">
+                {% verbatim %}
+                <li v-for="todo in todos" class="list-group-item" :class="{done: todo.done}">
+                    {{ todo.title }}
+                    <div class="pull-right">
+                        <button @click="toggle(todo)" class="btn btn-xs btn-default">
+                            Done
+                        </button>
+                        <button @click="remove(todo)" class="btn btn-xs btn-danger">
+                            Delete
+                        </button>
+                    </div>
+                </li>
+                {% endverbatim %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{ asset 'js/vue.min.js' }}"></script>
+<script src="{{ asset 'js/index.js' }}"></script>
+</body>
+</html>
